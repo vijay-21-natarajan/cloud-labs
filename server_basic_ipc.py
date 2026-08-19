@@ -1,5 +1,5 @@
 # server_basic_ipc.py  
-
+'''
 import socket
 HOST = "127.0.0.1"
 PORT = 5000
@@ -16,3 +16,19 @@ total = sum(numbers)
 conn.send(f"Sum = {total}".encode())
 conn.close()
 server.close()
+''' 
+import socket
+s = socket.socket()
+s.bind(("localhost", 12345))
+s.listen(1)
+c, addr = s.accept()
+print("Client connected")
+while True:
+    data = c.recv(1024).decode()
+    if data == "exit":
+        break
+    nums = map(int, data.split())
+    total = sum(nums)
+    c.send(str(total).encode())
+c.close()
+s.close()

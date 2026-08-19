@@ -1,5 +1,6 @@
 #server_pickle.py
 
+'''
 import socket
 import pickle
 class DataObject:
@@ -23,3 +24,17 @@ response = f"Hello {obj.name}, Sum = {total}"
 conn.send(response.encode())
 conn.close()
 server.close()
+'''
+import socket
+import pickle
+s = socket.socket()
+s.bind(("localhost", 12345))
+s.listen(1)
+c, addr = s.accept()
+data = pickle.loads(c.recv(1024))
+print("Name:", data["name"])
+print("Values:", data["values"])
+total = sum(data["values"])
+c.send(str(total).encode())
+c.close()
+s.close()

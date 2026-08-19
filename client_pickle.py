@@ -1,5 +1,5 @@
 #client_pickle.py
-
+'''
 import socket
 import pickle
 class DataObject:
@@ -17,3 +17,19 @@ client.send(serialized)
 response = client.recv(1024).decode()
 print(response)
 client.close()
+''' 
+import socket
+import pickle
+s = socket.socket()
+s.connect(("localhost", 12345))
+name = input("Name: ")
+values = list(map(int, input("Values: ").split()))
+data = {
+    "name": name,
+    "values": values
+}
+s.send(pickle.dumps(data))
+result = s.recv(1024).decode()
+print("Sum =", result)
+s.close()
+
