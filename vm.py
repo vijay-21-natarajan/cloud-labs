@@ -6,6 +6,7 @@ sudo apt install apache2 -y
 sudo systemctl enable apache2
 sudo systemctl status apache2
 sudo nano /var/www/html/index.html
+//after Ctrl O+Enter+ Ctrl X
 sudo apt install net-tools
 ifconfig  
 
